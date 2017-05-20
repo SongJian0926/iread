@@ -1,0 +1,150 @@
+#parse ("util.vm")
+package com.web.#toLowerCase(${project.identify}).business.service.impl;
+
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.web.webstart.base.service.impl.BaseService;
+import com.web.webstart.base.exception.BusinessException;
+import com.web.webstart.base.constant.XaConstant;
+import com.web.webstart.base.util.DynamicSpecifications;
+import com.web.webstart.base.util.SearchFilter;
+import com.web.webstart.base.util.SearchFilter.Operator;
+import com.web.webstart.base.util.XaResult;
+import com.web.webstart.base.util.XaUtil;
+import com.web.#toLowerCase(${project.identify}).business.entity.#initUpperCase(${model.identify});
+import com.web.#toLowerCase(${project.identify}).business.repository.#initUpperCase(${model.identify})Repository;
+import com.web.#toLowerCase(${project.identify}).business.service.#initUpperCase(${model.identify})Service;
+
+@Service("#initUpperCase(${model.identify})Service")
+@Transactional(readOnly = false)
+public class #initUpperCase(${model.identify})ServiceImpl extends BaseService<#initUpperCase(${model.identify})> implements #initUpperCase(${model.identify})Service {
+
+	@Autowired
+	private #initUpperCase(${model.identify})Repository #initLowerCase(${model.identify})Repository;
+	
+	/**
+	 * 查询单条#initUpperCase(${model.identify})信息
+	 * @param tId
+	 * @return 返回单个#initUpperCase(${model.identify})对象
+	 * @throws BusinessException
+	 */
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
+	public XaResult<#initUpperCase(${model.identify})> findOne(Long modelId) throws BusinessException {
+		#initUpperCase(${model.identify}) obj = new #initUpperCase(${model.identify})();
+		if(modelId != 0){
+			obj = #initLowerCase(${model.identify})Repository.findByIdAndStatusNot(modelId,XaConstant.Status.delete);
+		}
+		XaResult<#initUpperCase(${model.identify})> xr = new XaResult<#initUpperCase(${model.identify})>();
+		if (XaUtil.isNotEmpty(obj)) {
+			xr.setObject(obj);
+		} else {
+			throw new BusinessException(XaConstant.Message.object_not_find);
+		}
+		return xr;
+	}
+
+	/**
+	 * 分页查询状态非status的#initUpperCase(${model.identify})数据
+	 * @param status
+	 * @param filterParams
+	 * @param pageable
+	 * @return 返回对象#initUpperCase(${model.identify})集合
+	 * @throws BusinessException
+	 */
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
+	public XaResult<Page<#initUpperCase(${model.identify})>> findListNEStatusByFilter(
+			Integer status, Map<String, Object> filterParams, Pageable pageable) throws BusinessException {
+		Map<String, SearchFilter> filters = SearchFilter.parse(filterParams);
+		if(status == null){// 默认显示非删除的所有数据
+			status = XaConstant.Status.delete;
+		}
+		filters.put("status", new SearchFilter("status", Operator.NE, status));
+		Page<#initUpperCase(${model.identify})> page = #initLowerCase(${model.identify})Repository.findAll(DynamicSpecifications
+				.bySearchFilter(filters.values(), #initUpperCase(${model.identify}).class), pageable);
+		XaResult<Page<#initUpperCase(${model.identify})>> xr = new XaResult<Page<#initUpperCase(${model.identify})>>();
+		xr.setObject(page);
+		return xr;
+	}
+
+	/**
+	 * 分页查询状态status的#initUpperCase(${model.identify})数据
+	 * @param status
+	 * @param filterParams
+	 * @param pageable
+	 * @return 返回对象#initUpperCase(${model.identify})集合
+	 * @throws BusinessException
+	 */
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
+	public XaResult<Page<#initUpperCase(${model.identify})>> findListEQStatusByFilter(
+			Integer status, Map<String, Object> filterParams, Pageable pageable) throws BusinessException {
+		Map<String, SearchFilter> filters = SearchFilter.parse(filterParams);
+		if(status == null){// 默认显示正常数据
+			status = XaConstant.Status.valid;
+		}
+		filters.put("status", new SearchFilter("status", Operator.EQ, status));
+		Page<#initUpperCase(${model.identify})> page = #initLowerCase(${model.identify})Repository.findAll(DynamicSpecifications
+				.bySearchFilter(filters.values(), #initUpperCase(${model.identify}).class), pageable);
+		XaResult<Page<#initUpperCase(${model.identify})>> xr = new XaResult<Page<#initUpperCase(${model.identify})>>();
+		xr.setObject(page);
+		return xr;
+	}
+
+	/**
+	 * 保存#initUpperCase(${model.identify})信息
+	 * @param model
+	 * @return
+	 * @throws BusinessException
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public XaResult<#initUpperCase(${model.identify})> saveOrUpdate(#initUpperCase(${model.identify}) model) throws BusinessException {
+		#initUpperCase(${model.identify}) obj = null;
+		if(XaUtil.isNotEmpty(model.getId())){
+			obj = #initLowerCase(${model.identify})Repository.findOne(model.getId());
+		}else{
+			obj = new #initUpperCase(${model.identify})();
+		}
+	#foreach($property in $model.properties)
+	obj.set#initUpperCase(${property.identify})(model.get#initUpperCase(${property.identify})());
+	#end
+	obj = #initLowerCase(${model.identify})Repository.save(obj);
+		XaResult<#initUpperCase(${model.identify})> xr = new XaResult<#initUpperCase(${model.identify})>();
+		xr.setObject(obj);
+		return xr;
+	}
+
+	/**
+	 * 修改#initUpperCase(${model.identify})状态，可一次修改多条   3删除  -1锁定  1正常
+	 * @param userId
+	 * @param modelIds
+	 * @param status
+	 * @return 返回#initUpperCase(${model.identify})对象
+	 * @throws BusinessException
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public XaResult<#initUpperCase(${model.identify})> multiOperate(
+			String modelIds,Integer status) throws BusinessException {
+		XaResult<#initUpperCase(${model.identify})> xr = new XaResult<#initUpperCase(${model.identify})>();
+		if(status == null){
+			status = XaConstant.Status.delete;
+		}
+		if(modelIds != null){
+			String[] ids = modelIds.split(",");
+			for(String id : ids){
+				#initUpperCase(${model.identify}) obj = #initLowerCase(${model.identify})Repository.findByIdAndStatusNot(Long.parseLong(id),status);
+				if (XaUtil.isNotEmpty(obj)) {
+					obj.setStatus(status);
+					obj = #initLowerCase(${model.identify})Repository.save(obj);
+				} else {
+					throw new BusinessException(XaConstant.Message.object_not_find);
+				}
+			}
+		}
+		return xr;
+	}
+	
+}

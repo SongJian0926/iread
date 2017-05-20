@@ -1,0 +1,9 @@
+#parse ("util.vm")
+package com.web.#toLowerCase(${project.identify}).business.service;
+
+import com.web.#toLowerCase(${project.identify}).business.entity.#initUpperCase(${model.identify});
+import com.web.webstart.base.service.BaseServiceInterFace;
+
+public interface #initUpperCase(${model.identify})Service extends BaseServiceInterFace<#initUpperCase(${model.identify})>{
+
+}

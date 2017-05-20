@@ -1,0 +1,10 @@
+#parse ("util.vm")
+package com.web.#toLowerCase(${project.identify}).remote.service;
+
+import com.web.#toLowerCase(${project.identify}).business.entity.#initUpperCase(${model.identify});
+import com.web.#toLowerCase(${project.identify}).remote.vo.#initUpperCase(${model.identify})Vo;
+import com.web.webstart.base.service.ApiBaseService;
+
+public interface Api#initUpperCase(${model.identify})Service extends ApiBaseService<#initUpperCase(${model.identify})Vo,#initUpperCase(${model.identify})>{
+
+}

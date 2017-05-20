@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ireadMaster"
+  id="myeclipse.1434429034357"
+  context-root="/ireadMaster"
+  j2ee-spec="5.0"
+  archive="ireadMaster.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

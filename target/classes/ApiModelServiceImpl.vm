@@ -1,0 +1,142 @@
+#parse ("util.vm")
+package com.web.#toLowerCase(${project.identify}).remote.service.impl;
+
+import com.web.#toLowerCase(${project.identify}).business.entity.#initUpperCase(${model.identify});
+import com.web.#toLowerCase(${project.identify}).remote.vo.#initUpperCase(${model.identify})Vo;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.fastjson.JSON;
+import com.web.#toLowerCase(${project.identify}).business.repository.#initUpperCase(${model.identify})Repository;
+import com.web.#toLowerCase(${project.identify}).remote.service.Api#initUpperCase(${model.identify})Service;
+import com.web.webstart.base.constant.XaConstant;
+import com.web.webstart.base.exception.BusinessException;
+import com.web.webstart.base.util.DynamicSpecifications;
+import com.web.webstart.base.util.SearchFilter;
+import com.web.webstart.base.service.impl.BaseService;
+import com.web.webstart.base.util.SearchFilter.Operator;
+import com.web.webstart.base.util.XaResult;
+import com.web.webstart.base.util.XaUtil;
+
+/**
+ * @Autor: zhangl
+ * @times: 2015-5-15下午06:46:35
+ * 类的说明：前端API#initUpperCase(${model.identify})接口实现类
+ **/
+@Service("Api#initUpperCase(${model.identify})Service")
+@Transactional(readOnly = false)
+public class Api#initUpperCase(${model.identify})ServiceImpl extends BaseService<#initUpperCase(${model.identify})> implements Api#initUpperCase(${model.identify})Service{
+
+	@Autowired
+	#initUpperCase(${model.identify})Repository #initLowerCase(${model.identify})Repository;
+	
+	@Override
+	public XaResult<#initUpperCase(${model.identify})Vo> findOne(Long tId) throws BusinessException {
+		#initUpperCase(${model.identify}) obj = #initLowerCase(${model.identify})Repository.findByIdAndStatusNot(tId,XaConstant.Status.delete);
+		XaResult<#initUpperCase(${model.identify})Vo> xr = new XaResult<#initUpperCase(${model.identify})Vo>();
+		if (XaUtil.isNotEmpty(obj)) {
+			xr.setObject(JSON.parseObject(JSON.toJSONString(obj),#initUpperCase(${model.identify})Vo.class));
+			xr.getObject().setId(obj.getId());
+		} else {
+			throw new BusinessException(XaConstant.Message.object_not_find);
+		}
+		return xr;
+	}
+
+	@Override
+	public XaResult<List<#initUpperCase(${model.identify})Vo>> findListNEStatusByFilter(
+			Integer status, Map<String, Object> filterParams, Pageable pageable)
+			throws BusinessException {
+		Map<String, SearchFilter> filters = SearchFilter.parse(filterParams);
+		if(status == null){// 默认显示非删除的所有数据
+			status = XaConstant.Status.delete;
+		}
+		filters.put("status", new SearchFilter("status", Operator.NE, status));
+		Page<#initUpperCase(${model.identify})> page = #initLowerCase(${model.identify})Repository.findAll(DynamicSpecifications
+				.bySearchFilter(filters.values(), #initUpperCase(${model.identify}).class), pageable);
+		XaResult<List<#initUpperCase(${model.identify})Vo>> xr = new XaResult<List<#initUpperCase(${model.identify})Vo>>();
+		xr.setObject(JSON.parseArray(JSON.toJSONString(page.getContent()), #initUpperCase(${model.identify})Vo.class));
+		for(int i=0;i<page.getContent().size();i++){
+			xr.getObject().get(i).setId(page.getContent().get(i).getId());
+		}
+		return xr;
+	}
+
+	@Override
+	public XaResult<List<#initUpperCase(${model.identify})Vo>> findListEQStatusByFilter(
+			Integer status, Map<String, Object> filterParams, Pageable pageable)
+			throws BusinessException {
+		Map<String, SearchFilter> filters = SearchFilter.parse(filterParams);
+		if(status == null){// 默认显示正常数据
+			status = XaConstant.Status.valid;
+		}
+		filters.put("status", new SearchFilter("status", Operator.EQ, status));
+		Page<#initUpperCase(${model.identify})> page = #initLowerCase(${model.identify})Repository.findAll(DynamicSpecifications
+				.bySearchFilter(filters.values(), #initUpperCase(${model.identify}).class), pageable);
+		XaResult<List<#initUpperCase(${model.identify})Vo>> xr = new XaResult<List<#initUpperCase(${model.identify})Vo>>();
+		xr.setObject(JSON.parseArray(JSON.toJSONString(page.getContent()), #initUpperCase(${model.identify})Vo.class));
+		for(int i=0;i<page.getContent().size();i++){
+			xr.getObject().get(i).setId(page.getContent().get(i).getId());
+		}
+		return xr;
+	}
+
+	@Override
+	public XaResult<#initUpperCase(${model.identify})Vo> multiOperate(String modelIds,
+			Integer status) throws BusinessException {
+		XaResult<#initUpperCase(${model.identify})Vo> xr = new XaResult<#initUpperCase(${model.identify})Vo>();
+		if(status == null){
+			status = XaConstant.Status.delete;
+		}
+		if(modelIds != null){
+			String[] ids = modelIds.split(",");
+			for(String id : ids){
+				#initUpperCase(${model.identify}) obj = #initLowerCase(${model.identify})Repository.findByIdAndStatusNot(Long.parseLong(id),status);
+				if (XaUtil.isNotEmpty(obj)) {
+					obj.setStatus(status);
+					obj = #initLowerCase(${model.identify})Repository.save(obj);
+					xr.setObject(JSON.parseObject(JSON.toJSONString(obj), #initUpperCase(${model.identify})Vo.class));
+					xr.getObject().setId(obj.getId());
+				} else {
+					throw new BusinessException(XaConstant.Message.object_not_find);
+				}
+			}
+		}
+		return xr;
+	}
+
+	@Override
+	public XaResult<#initUpperCase(${model.identify})Vo> createModel(#initUpperCase(${model.identify}) model)
+			throws BusinessException {
+		XaResult<#initUpperCase(${model.identify})Vo> xr = new XaResult<#initUpperCase(${model.identify})Vo>();
+		#initUpperCase(${model.identify}) obj = #initLowerCase(${model.identify})Repository.save(model);
+		xr.setObject(JSON.parseObject(JSON.toJSONString(obj), #initUpperCase(${model.identify})Vo.class));
+		xr.getObject().setId(obj.getId());
+		return xr;
+	}
+
+	@Override
+	public XaResult<#initUpperCase(${model.identify})Vo> updateModel(#initUpperCase(${model.identify}) model)
+			throws BusinessException {
+		#initUpperCase(${model.identify}) obj = #initLowerCase(${model.identify})Repository.findOne(model.getId());
+		XaResult<#initUpperCase(${model.identify})Vo> xr = new XaResult<#initUpperCase(${model.identify})Vo>();
+		if (XaUtil.isNotEmpty(obj)) {
+	#foreach($property in $model.properties)
+	obj.set#initUpperCase(${property.identify})(model.get#initUpperCase(${property.identify})());
+	#end
+		obj = #initLowerCase(${model.identify})Repository.save(obj);
+			xr.setObject(JSON.parseObject(JSON.toJSONString(obj), #initUpperCase(${model.identify})Vo.class));
+			xr.getObject().setId(obj.getId());
+		} else {
+			throw new BusinessException(XaConstant.Message.object_not_find);
+		}
+		return xr;
+	}
+
+}

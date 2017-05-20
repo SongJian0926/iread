@@ -1,0 +1,61 @@
+#parse ("util.vm")
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>${model.name} 编辑页面</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <jsp:include page="../com/header.jsp"></jsp:include>
+        <script type="text/javascript" src="../../js/comm/editcomm.js"></script>
+        <script type="text/javascript">
+		$(function(){
+			getDataById(root + 'cms/#initLowerCase(${model.identify})/find#initUpperCase(${model.identify})ById',"#[[#]]##initLowerCase(${model.identify})Tmpl","#[[#]]##initLowerCase(${model.identify})Content");
+			$("#saveOrupdate").click(function(){
+				saveData(root + 'cms/#initLowerCase(${model.identify})/save#initUpperCase(${model.identify})','#initLowerCase(${model.identify})List.jsp');
+			});
+		});
+        </script>
+    </head>
+    <body>
+      <section>
+          <div>
+              <div class="col-xs-12">
+                  <div class="box" style="height:900px">
+                      <div class="box-header">
+                      <br>
+                          <input type="button" value="确定" id="saveOrupdate" class="btn btn-success">
+                          <button onclick="backAction('#initLowerCase(${model.identify})Edit.jsp');" class="btn btn-info" >返回</button>
+                      </div>
+                     <form id="submit_form" class="form-horizontal">
+                        <div class="tab" id="#initLowerCase(${model.identify})Content">
+                  	    </div>
+                  	 </form>
+              </div>
+          </div>
+      </section>
+      <script type="text/x-jsrender" id="#initLowerCase(${model.identify})Tmpl">
+			<fieldset> 
+				<input type="hidden" id="tId" name="id" value="{{:id}}" />
+	        	{{!--<div class="form-group">
+        			<label class="col-md-2 control-label controls" for="formGroupInputSmall">图片：</label>
+       				 <div class="col-md-3">
+						<div class="upload_div">
+                        	<img id="myImageShow" src="../../{{:imgUrl}}" width="100px" height="100px" />
+                        	<input type="hidden" id="imgUrl" name="imgUrl" value="{{:imgUrl}}"/>
+                        	<input type="file" id="uploadPhotoFile" name="photoFile" class="upload_file">
+                        </div>
+					</div>
+      			</div>--}}
+	#foreach($property in $model.properties)
+			<div class="form-group">
+        			<label class="col-md-2 control-label controls" for="formGroupInputSmall">${property.name}：</label>
+       				 <div class="col-md-3">
+						<input type="text" placeholder="请填写${property.name}" class="form-control input-sm" data-rule="required;#if($property.length>0)length[0~${property.length}]#end" id="#initLowerCase(${property.identify})" name="#initLowerCase(${property.identify})" value="{{:#initLowerCase(${property.identify})}}" />
+					</div>
+      			</div>
+	#end
+		</fieldset>
+	</script>
+    </body>
+</html>

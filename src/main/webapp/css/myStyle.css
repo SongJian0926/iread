@@ -1,0 +1,185 @@
+body {
+font-size: 13px;
+font-family: "Microsoft Yahei";
+background-color: #f8f8f8;
+}
+input[type='button']{
+	height: 30px;
+}
+.select{
+	width: 156px;
+	height: 26px;
+}
+.tab{
+  border:0px solid #0033FF;
+  height:auto;
+}
+.tab li{
+  width:150px;
+  height:40px;
+  border:0px solid #0033ff;
+  list-style:none;
+  text-align:right;
+  float:left;
+}
+.textClass{
+  width:300px;
+  height:40px;
+  border:0px solid #0033ff;
+  list-style:none;
+  text-align:left;
+  float:left;
+}
+.textClass{
+  width:500px;
+  height:40px;
+  border:0px solid #0033ff;
+  list-style:none;
+  text-align:left;
+  float:left;
+}
+.tabone{
+  border:0px solid #0033FF;
+  width:920px;
+  height:auto;
+}
+.tabone li{
+  width:130px;
+  height:40px;
+  border:0px solid #0033ff;
+  list-style:none;
+  text-align:right;
+  float:left;
+}
+.tabSelect{
+  border:0px solid #0033FF;
+  height:auto;
+}
+.tabSelect li{
+  width:130px;
+  height:40px;
+  border:0px solid #0033ff;
+  list-style:none;
+  text-align:right;
+  float:left;
+}
+.controls{
+  list-style:none;
+  text-align:left;
+  font-size:12px;  
+  font-weight:bold;
+}
+.table>thead>tr>th{
+	vertical-align:middle;
+	margin:0px;
+	text-align: center;
+    overflow: hidden;
+    background:#e5e5e5;
+    font-weight:bold;
+}
+.table>tbody>tr>td{
+	vertical-align:middle;
+	text-align:center;
+	margin:0px;
+	cursor:pointer;
+}
+.col-xs-12{
+	position: relative;
+	min-height: 1px;
+	padding-right: 1px;
+	padding-left: 1px;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+	white-space: nowrap;
+}
+.col-md-11{
+	white-space:normal;
+}
+.form-group.col-md-3.search-form{
+    margin-bottom: 10px;
+}
+label.control-label{
+  padding-top:2px;
+}
+.well{
+	padding:0px;
+	margin:0px;
+	margin-bottom: 0px;
+	padding-bottom:10px;
+}
+#search_form .searchBtn,.searchBtn{
+	width: 82px;
+	height:30px;
+	background: url('../image/search_btn.png') 10px center no-repeat #dddddd;
+	border: none;
+	padding-left: 35px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+#addSome{
+	height: 30px;
+	border: none;
+}
+#updateSome{
+	width: 48px;
+	height: 30px;
+	border: none;
+}
+#lockSome,#openSome{
+	width: 48px;
+	height: 30px;
+	border: none;
+}
+#lookDetailSome{
+	width: 74px;
+	height: 30px;
+	border: none;
+}
+
+/** 上传按钮样式 */
+.upload_div{
+	width:100px;
+	overflow:hidden;
+	height:100px;
+	border:none;
+	background:#ddd;
+	border-radius:4px;
+	text-align:center;
+	position:relative;
+	line-height:100px;
+}
+.upload_file{
+	position:absolute;
+	top:0;
+	right:0;
+	opacity:0;
+	height:100%;
+	cursor:pointer;
+}
+
+/** 权限页面部分样式 */
+.priv_d1{
+	width:100%;
+	margin-right:10px;
+	overflow:hidden;
+	margin-top:60px;
+}
+.priv_emp{
+	height:30px;
+	background:#cdcdcd;
+	line-height:30px;
+	padding:10px;
+	margin-right:10px;
+}
+.priv_d2{
+	margin-bottom:20px;
+}
+
+/** 分页样式div */
+.page_big_div{
+	 overflow:hidden;
+	 padding:30px 15px 0px 15px;
+}

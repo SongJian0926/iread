@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="profiler.settings.instrument.empty.methods">true</entry>
+<entry key="ProfilerCPUSettings_profile_runnables">true</entry>
+<entry key="profiler.settings.n.profiled.threads.limit">32</entry>
+<entry key="ProfilerCPUSettings_filter_type">2</entry>
+<entry key="profiler.settings.obj.alloc.stack.sampling.depth">-1</entry>
+<entry key="profiler.settings.instrument.method.invoke">true</entry>
+<entry key="profiler.settings.instr.scheme">1</entry>
+<entry key="ProfilerMemorySettings_track_every">10</entry>
+<entry key="ProfilerMemorySettings_mode">4</entry>
+<entry key="ProfilerCPUSettings_root_classes">com.baidu.ueditor.**
+com.commons.**
+com.web.iread.business.controller.**
+com.web.iread.business.entity.**
+com.web.iread.business.repository.**
+com.web.iread.business.service.**
+com.web.iread.remote.controller.**
+com.web.iread.remote.vo.**
+com.web.iread.test.controller.**
+com.web.iread.test.service.**
+com.web.webstart.base.**
+com.web.webstart.business.controller.**
+com.web.webstart.business.entity.**
+com.web.webstart.business.repository.**
+com.web.webstart.business.service.**
+com.web.webstart.controller.**
+com.web.webstart.remote.**
+com.web.webstart.service.**
+</entry>
+<entry key="ProfilerCPUSettings_filter_value">com.baidu.ueditor.*,&#13;
+com.commons.*,&#13;
+com.web.iread.business.controller.*,&#13;
+com.web.iread.business.entity.*,&#13;
+com.web.iread.business.repository.*,&#13;
+com.web.iread.business.service.*,&#13;
+com.web.iread.remote.controller.*,&#13;
+com.web.iread.remote.vo.*,&#13;
+com.web.iread.test.controller.*,&#13;
+com.web.iread.test.service.*,&#13;
+com.web.webstart.base.*,&#13;
+com.web.webstart.business.controller.*,&#13;
+com.web.webstart.business.entity.*,&#13;
+com.web.webstart.business.repository.*,&#13;
+com.web.webstart.business.service.*,&#13;
+com.web.webstart.controller.*,&#13;
+com.web.webstart.remote.*,&#13;
+com.web.webstart.service.*</entry>
+<entry key="profiler.settings.istrument.getter.setter.methods">true</entry>
+<entry key="myeclipse.profiling.mode">0</entry>
+<entry key="ProfilerMemorySettings_stacktraces">-1</entry>
+<entry key="profiler.settings.sampling.interval">10</entry>
+<entry key="profiler.settings.cpu.profiling.type">0</entry>
+</properties>

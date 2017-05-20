@@ -1,0 +1,114 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "Microsoft Yahei";
+	background: url(../image/bg.jpg) no-repeat;
+	background-size: cover;
+}
+.login-box{
+	width: 622px;
+	height: 436px;
+	background-color: #d8d7d7;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -311px;
+	margin-top: -218px;
+	padding: 10px;
+	border: none;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+.login-title{
+	padding: 5px 3px;
+	margin: 0;
+	font-weight: bold;
+	font-size: 24px;
+}
+.login-line{
+	margin-top: 5px;
+	border-top: 1px solid #a7a29e;
+	width: 100%;
+	height: 1px;
+	margin-bottom: 32px;
+}
+.login-input-div{
+	width: 333px;
+	margin: auto;
+	position: relative;
+}
+.fn-center{
+	text-align: center;
+	margin-top:26px;
+}
+.login-input-div input[type="text"],.login-input-div input[type="password"]{
+	width: 285px;
+	height: 50px;
+	margin: 12px 0;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border: none;
+    background-color: #2c2b2b;
+    color: #fff;
+    font-size: 14px;
+    padding-left: 48px;
+}
+.login-input-div label{
+	width: 114px;
+	height: 50px;
+	background-color: #8ca1b4;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    float: right;
+    line-height: 50px;
+    margin-top: 12px;
+    text-align: center;
+}
+.login-input-div input[type="button"]{
+	width: 142px;
+	height: 50px;
+	margin: 12px 0;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border: none;
+    background-color: #276ca7;
+    color: #fff;
+    font-size: 14px;
+}
+.lock_bg{
+	background-image: url(../image/lock.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+}
+.user_bg{
+	background-image: url(../image/userfemale.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+}
+
+.error_message{
+	color: red;
+	position: absolute;
+	top: 25px;
+	right: -110px;
+}
+
+.msg-wrap{
+	margin-top:25px;
+}
